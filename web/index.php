@@ -1,5 +1,10 @@
 <?php
 
+echo "hi Craig";
+echo "";
+echo "";
+
+
 require('../vendor/autoload.php');
 
 $app = new Silex\Application();
