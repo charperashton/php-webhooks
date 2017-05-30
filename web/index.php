@@ -12,11 +12,11 @@ $parameters = $request["result"]["parameters"];
 switch($action)
   {
     case "flight.check":
-      $output["speech"] = "action type [$action]"
+      $output["speech"] = "action type [$action]";
       break;
 
     default:
-      $output["speech"] = "unkown action type [$action]"
+      $output["speech"] = "unkown action type [$action]";
       break;
   }
 
