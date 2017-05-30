@@ -10,6 +10,7 @@ $request = json_decode($json, true);
 $action = $request["result"]["action"];
 $parameters = $request["result"]["parameters"];
 
+$srcCity = $request["result"]["parameters"]["to"]["city"];
 
 switch($action)
   {
@@ -21,6 +22,10 @@ switch($action)
       $output["speech"] = "action type [$action] is not yet coded for";
       break;
   }
+
+
+
+
 
 $record = new flight("UA 234");
 $record = new flight("UA 340");
@@ -40,14 +45,12 @@ $record = new flight("UA 102");
 #$output["source"] = "whatever.php";
 
 # testing
-$output["speech"] = "flight number parameter is: " . $parameters["flight-number"];
+$output["speech"] = "source city is: " . $srcCity;
+#$output["speech"] = "flight number parameter is: " . $parameters["flight-number"];
 #$output["displayText"] = "this is the displayText output from the webhook";
 
 ob_end_clean();
 echo json_encode($output);
-
-
-
 class flight
 {
   var $flightNumber;
