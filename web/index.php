@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 ob_start();
 
 $json = file_get_contents('php://input'); 
+
 $request = json_decode($json, true);
 $action = $request["result"]["action"];
 $parameters = $request["result"]["parameters"];
@@ -17,9 +18,15 @@ switch($action)
       break;      
 
     default:
-      $output["speech"] = "unkown action type [$action]";
+      $output["speech"] = "action type [$action] is not yet coded for";
       break;
   }
+
+
+
+
+
+
 
 
 
@@ -33,14 +40,11 @@ switch($action)
 $output["speech"] = "flight number parameter is: " . $parameters["flight-number"];
 #$output["displayText"] = "this is the displayText output from the webhook";
 
-echo $output["speech"];
-
-
 ob_end_clean();
 echo json_encode($output);
 
 
-/*
+
 class flight
 {
   var $flight-number;
@@ -109,11 +113,14 @@ class flight
             break;
         }
 
+      }
 }
+
+
+
 
 */
 
 
 
 ?>
-
