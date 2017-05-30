@@ -1,9 +1,6 @@
 <?php
 
 
-
-
-
 header('Content-Type: application/json');
 ob_start();
 
@@ -11,13 +8,6 @@ $json = file_get_contents('php://input');
 $request = json_decode($json, true);
 $action = $request["result"]["action"];
 $parameters = $request["result"]["parameters"];
-
-
-
-
-
-
-
 
 
 switch($action)
@@ -40,7 +30,7 @@ switch($action)
 #$output["source"] = "whatever.php";
 
 # testing
-$output["speech"] = "flight number parameter is: " . $parameters["result"]["parameters"]["flight-number"];
+$output["speech"] = "flight number parameter is: " . $request["result"]["parameters"]["flight-number"];
 #$output["displayText"] = "this is the displayText output from the webhook";
 
 echo $output["speech"];
