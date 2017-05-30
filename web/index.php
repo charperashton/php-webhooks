@@ -22,8 +22,11 @@ switch($action)
       break;
   }
 
-
-
+$record = new flight("UA 234");
+$record = new flight("UA 340");
+$record = new flight("UA 342");
+$record = new flight("UA 22");
+$record = new flight("UA 102");
 
 
 
@@ -47,7 +50,7 @@ echo json_encode($output);
 
 class flight
 {
-  var $flight-number;
+  var $flightNumber;
   var $airline;
   var $source;
   var $destination;
@@ -58,12 +61,12 @@ class flight
 
   function __construct($flightNumber)
     {
-      $this->flight-number = $flightNumber;
+      $this->flightNumber = $flightNumber;
 
-      switch($this->flight-number)
+      switch($this->flightNumber)
         {
-          case("UA 234"):
-            $this->airline = 'United Airlines";
+          case "UA 234":
+            $this->airline = "United Airlines";
             $this->source = "New York";
             $this->destination = "Chicago";
             $this->depart_time = "13:40";
@@ -72,8 +75,8 @@ class flight
             $this->status = "on time";
             break;
 
-          case("UA 340"):
-            $this->airline = 'United Airlines";
+          case "UA 340":
+            $this->airline = "United Airlines";
             $this->source = "New York";
             $this->destination = "Seattle";
             $this->depart_time = "14:00";
@@ -82,8 +85,8 @@ class flight
             $this->status = "delayed";
             break;
 
-          case("UA 342"):
-            $this->airline = 'United Airlines";
+          case "UA 342":
+            $this->airline = "United Airlines";
             $this->source = "Los Angeles";
             $this->destination = "Boston";
             $this->depart_time = "15:20";
@@ -92,8 +95,8 @@ class flight
             $this->status = "ahead of schedule";
             break;
 
-          case("UA 22"):
-            $this->airline = 'United Airlines";
+          case "UA 22":
+            $this->airline = "United Airlines";
             $this->source = "Orlando";
             $this->destination = "San Fransisco";
             $this->depart_time = "11:40";
@@ -102,8 +105,8 @@ class flight
             $this->status = "on time";
             break;
 
-          case("UA 102"):
-            $this->airline = 'United Airlines";
+          case "UA 102":
+            $this->airline = "United Airlines";
             $this->source = "Houston";
             $this->destination = "Washington DC";
             $this->depart_time = "12:45";
@@ -113,14 +116,8 @@ class flight
             break;
         }
 
-      }
+    }
+
 }
-
-
-
-
-*/
-
-
 
 ?>
