@@ -141,7 +141,7 @@ class flight
           case "UA 102":
             $this->airline = "United Airlines";
             $this->source = "Houston";
-            $this->destination = "Washington DC";
+            $this->destination = "Tampa";
             $this->depart_time = "12:45";
             $this->land_time = "18:20";
             $this->eta = "19:20";
