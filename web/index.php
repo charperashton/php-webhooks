@@ -1,6 +1,5 @@
 <?php
 
-
 header('Content-Type: application/json');
 ob_start();
 
@@ -11,32 +10,7 @@ $action = $request["result"]["action"];
 $parameters = $request["result"]["parameters"];
 
 $srcCity = $request["result"]["parameters"]["to"]["city"];
-
-switch($action)
-  {
-    case "flight.check":
-      $output["speech"] = "action type [$action]";
-      break;      
-
-    default:
-      $output["speech"] = "action type [$action] is not yet coded for";
-      break;
-  }
-
-
-
-
-
-$record = new flight("UA 234");
-$record = new flight("UA 340");
-$record = new flight("UA 342");
-$record = new flight("UA 22");
-$record = new flight("UA 102");
-
-
-
-
-
+$flightNumber = $parameters["flight-number"];
 
 # Code to set $outputtext, $nextcontext, $param1, $param2 values
 #$output["contextOut"] = array(array("name" => "$next-context", "parameters" => array("param1" => $param1value, "param2" => $param2value)));
@@ -44,13 +18,68 @@ $record = new flight("UA 102");
 #$output["displayText"] = $outputtext;
 #$output["source"] = "whatever.php";
 
+$returnSpeech = execute($action, $flightNumber, $srcCity);
+
+
 # testing
-$output["speech"] = "source city is: " . $srcCity;
+$output["speech"] = $returnSpeech;
 #$output["speech"] = "flight number parameter is: " . $parameters["flight-number"];
 #$output["displayText"] = "this is the displayText output from the webhook";
 
 ob_end_clean();
 echo json_encode($output);
+
+
+
+
+
+function execute($action, $flightNo, $city)
+{
+
+  switch($action)
+    {
+      case "flight.check":
+        $record = array();
+        $record[0] = new flight("UA 234");
+        $record[1] = new flight("UA 340");
+        $record[2] = new flight("UA 342");
+        $record[3] = new flight("UA 22");
+        $record[4] = new flight("UA 102");
+
+        if($flightNo != "")
+          {
+            for($ctr=0;$ctr<count($record);$ctr++)
+              {
+                if($record[$ctr]->flightNumber == $flightNo)
+                  {
+                    $returnString = $record[$ctr]->airline . " flight " . $record[$ctr]->flightNumber . " is " . $record[$ctr]->status . " to " . $record[$ctr]->destination . ".  Estimated time of arrival is " . $record[$ctr]->eta;
+                    return($returnString);
+                  }
+              }
+          }
+
+        if($city != "")
+          {
+            for($ctr=0;$ctr<count($record);$ctr++)
+              {
+                if($record[$ctr]->destination == $city)
+                  {
+                    $returnString = $record[$ctr]->airline . " flight " . $record[$ctr]->flightNumber . " is " . $record[$ctr]->status . " to " . $record[$ctr]->destination . ".  Estimated time of arrival is " . $record[$ctr]->eta;
+                    return($returnString);
+                  }
+              }
+           }
+
+        $returnString = "unable to find flight, please specify flight number or destination";
+
+        break;      
+
+      default:
+        $output["speech"] = "action type [$action] is not yet coded for";
+        break;
+    }
+}
+
 class flight
 {
   var $flightNumber;
@@ -64,6 +93,7 @@ class flight
 
   function __construct($flightNumber)
     {
+
       $this->flightNumber = $flightNumber;
 
       switch($this->flightNumber)
