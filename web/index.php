@@ -9,7 +9,7 @@ $request = json_decode($json, true);
 $action = $request["result"]["action"];
 $parameters = $request["result"]["parameters"];
 
-$srcCity = $request["result"]["parameters"]["to"]["city"];
+$srcCity = $request["result"]["parameters"]["to"];
 $flightNumber = $parameters["flight-number"];
 
 # Code to set $outputtext, $nextcontext, $param1, $param2 values
