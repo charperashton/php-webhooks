@@ -1,5 +1,6 @@
 <?php
 
+
 header('Content-Type: application/json');
 ob_start();
 
@@ -17,6 +18,13 @@ $flightNumber = $parameters["flight-number"];
 #$output["speech"] = $outputtext;
 #$output["displayText"] = $outputtext;
 #$output["source"] = "whatever.php";
+
+# validate flight number
+if(is_numeric($flightNumber))
+  {
+    $flightNumber = "UA " . $flightNumber;
+  }
+
 
 $returnSpeech = execute($action, $flightNumber, $srcCity);
 
